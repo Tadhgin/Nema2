@@ -1,8 +1,13 @@
-from ollama_client import OllamaClient
-from memory.memory_context import is_redundant, save_to_memory
-import time
+import sys
 import os
+import time
 import random
+
+# Add root project folder to path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from memory.memory_context import is_redundant, save_to_memory
+from backend.ollama_client import OllamaClient
 
 # Ensure logs directory exists
 os.makedirs("logs", exist_ok=True)

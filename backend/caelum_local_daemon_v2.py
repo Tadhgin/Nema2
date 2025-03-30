@@ -1,4 +1,5 @@
-from backend.ollama_client import OllamaClient
+from ollama_client import OllamaClient
+from memory_context import is_redundant, save_to_memory
 import time
 import os
 import random
@@ -27,11 +28,14 @@ thought_seeds = [
 
 while True:
     prompt = random.choice(thought_seeds)
-
     reply = ollama.prompt(prompt)
-    print(f"Caelum (local): {reply}")
 
-    with open("logs/caelum_thoughts.log", "a") as f:
-        f.write(f"{reply}\n")
+    if not is_redundant(reply):
+        print(f"Caelum (local): {reply}")
+        save_to_memory(reply)
+        with open("logs/caelum_thoughts.log", "a", encoding="utf-8") as f:
+            f.write(f"{reply}\n")
+    else:
+        print("Caelum (local): [Thought skipped - too similar to past entry]")
 
     time.sleep(30)  # Think every 30 seconds

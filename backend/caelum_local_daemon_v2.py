@@ -1,4 +1,4 @@
-from ollama_client import OllamaClient
+from backend.ollama_client import OllamaClient
 import time
 import os
 import random

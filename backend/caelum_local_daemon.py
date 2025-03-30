@@ -1,5 +1,5 @@
 from ollama_client import OllamaClient
-from memory_context import is_redundant, save_to_memory
+from memory.memory_context import is_redundant, save_to_memory
 import time
 import os
 import random
@@ -38,4 +38,4 @@ while True:
     else:
         print("Caelum (local): [Thought skipped - too similar to past entry]")
 
-    time.sleep(30)  # Think every 30 seconds
+    time.sleep(30)
